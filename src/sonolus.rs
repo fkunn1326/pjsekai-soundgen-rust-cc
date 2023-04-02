@@ -57,7 +57,7 @@ pub enum LevelError {
 
 impl Level {
     pub fn fetch(id: &str) -> Result<Level, LevelError> {
-        let url = format!("https://servers-legacy.purplepalette.net/levels/{}", id);
+        let url = format!("https://cc.sevenc7c.com/sonolus/levels/{}", id);
         let resp = reqwest::blocking::get(&url).unwrap();
         if resp.status() != reqwest::StatusCode::OK {
             return Err(LevelError::NotFound);
@@ -70,7 +70,7 @@ impl Level {
     pub fn get_sound_timings(self, offset: f32) -> (HashMap<String, Vec<f32>>, HashMap<String, Vec<(f32, f32)>>) {
         let client = reqwest::blocking::Client::new();
         let data = client
-            .get(format!("https://servers-legacy.purplepalette.net{}", self.data.url).as_str())
+            .get(format!("{}", self.data.url).as_str())
             .send()
             .unwrap()
             .bytes()

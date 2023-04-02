@@ -67,7 +67,7 @@ fn parse_args() -> Args {
 fn select_level_from_query(query: &String) -> String {
     let client = reqwest::blocking::Client::new();
     let levels = client
-        .get("https://servers-legacy.purplepalette.net/levels/list")
+        .get("https://cc.sevenc7c.com/sonolus/levels/list")
         .query(&[("keywords", query)])
         .send()
         .unwrap()
@@ -90,13 +90,13 @@ fn select_level_from_query(query: &String) -> String {
 fn load_bgm(id: &String, buf: &mut Vec<u8>) {
     let client = reqwest::blocking::Client::new();
     let level = client
-        .get(format!("https://servers-legacy.purplepalette.net/levels/{}", id).as_str())
+        .get(format!("https://cc.sevenc7c.com/sonolus/levels/{}", id).as_str())
         .send()
         .unwrap()
         .json::<SingleLevelResponse>()
         .unwrap();
     let mut bgm_response = client
-        .get(format!("https://servers-legacy.purplepalette.net{}", level.item.bgm.url))
+        .get(format!("{}", level.item.bgm.url))
         .send()
         .unwrap();
     bgm_response.copy_to(buf).unwrap();
