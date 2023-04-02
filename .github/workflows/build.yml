@@ -1,7 +1,10 @@
 name: Build and release binary
 on:
   push:
-  workflow_dispatch:
+    tags:
+      - 'v*'
+    paths:
+      - '.github/workflows/build.yml'
 
 jobs:
   build:
