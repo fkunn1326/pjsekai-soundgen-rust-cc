@@ -5,6 +5,7 @@ on:
       - 'v*'
     paths:
       - '.github/workflows/build.yml'
+  workflow_dispatch:
 
 jobs:
   build:
